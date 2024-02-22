@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotbox Digital</title>
+    <style>
+        body, .dark-mode {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        body {
+            background-color: #ffff;
+            color: #333;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .artist {
+            margin: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .artist img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .artist a, .dark-mode .artist a {
+            text-decoration: none;
+        }
+        .artist a {
+            color: #333;
+        }
+        .dark-mode .artist a {
+            color: #ddd;
+        }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #333;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #555;
+    }
+    .dark-mode button {
+        color: #333;
+        background-color: #ddd;
+    }
+    .dark-mode button:hover {
+        background-color: #bbb;
+    }
+    </style>
+</head>
+<body>
+    <button style="display:none" id="darkModeToggle">Toggle Dark Mode</button>
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : prefersDarkScheme.matches ? 'dark' : 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        toggleButton.addEventListener('click', () => {
+            let theme;
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.remove('dark-mode');
+                theme = 'light';
+            } else {
+                document.body.classList.add('dark-mode');
+                theme = 'dark';
+            }
+            localStorage.setItem('theme', theme);
+            updateColors();
+        });
+
+        function updateColors() {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            document.body.style.backgroundColor = isDarkMode ? '#333' : '#fff';
+            document.body.style.color = isDarkMode ? '#fff' : '#333';
+            const artists = document.querySelectorAll('.artist a');
+            artists.forEach(artist => {
+                artist.style.color = isDarkMode ? '#ddd' : '#333';
+            });
+        }
+
+        updateColors();
+    </script>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="logo.png" alt="Hotbox Digital Logo" style="width: 100px; height: auto;">
+    </div>
+    <h1>Hotbox Digital Artists</h1>
+    <div class="artist">
+        <img src="instagram_logo.png" alt="Instagram">
+        <a href="https://www.instagram.com/djadamk">Adam K</a>
+    </div>
+    <div class="artist">
+        <img src="instagram_logo.png" alt="Instagram">
+        <a href="https://www.instagram.com/danieldubb/?hl=en">Daniel Dubb</a>
+    </div>
+    <div class="artist">
+        <img src="instagram_logo.png" alt="Instagram">
+        <a href="https://www.instagram.com/iamdrewnorth/">Drew North</a>
+    </div>
+    <div class="artist">
+        <img src="instagram_logo.png" alt="Instagram">
+        <a href="#">Fatman Skinny</a>
+    </div>
+    <div class="artist">
+        <img src="instagram_logo.png" alt="Instagram">
+        <a href="https://instagram.com/pengu_music">Pengu</a>
+    </div>
+    <p>email: pablo@hashingsystems.com</p>
+
+</body>
+</html>
